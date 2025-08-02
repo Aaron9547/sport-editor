@@ -34,7 +34,7 @@ export async function loginByPassword(username, password) {
       `https://api-user.huami.com/registrations/+86${username}/tokens`,
       data
     );
-    log.info("登录成功, 开始获取登录授权码");
+    log.info(`登录成功, 开始获取登录授权码 res: ${res}`);
 
     // 获取Code
     const path = new URL(res.request.path, redirect_uri);
@@ -44,7 +44,7 @@ export async function loginByPassword(username, password) {
       log.info(`获取登录授权码成功 code: ${code}`);
       return code;
     }
-    throw new Error("获取登录授权码失败");
+    throw new Error(`获取登录授权码失败 params: ${params}`);
   } catch (e) {
     log.error("登录失败， 请检查账号密码");
     throw e;
